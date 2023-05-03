@@ -294,8 +294,10 @@ export class VolAnalyseComponent {
         this.stewart.xAxis.categories=[];
         for (let nom of this.noms) {
           this.stewart.xAxis.categories.push(nom.data().nomPrenom);
-          //console.log(this.texte)
+          console.log(this.stewart.xAxis.categories);
         }
+        console.log(this.stewart.xAxis.categories);
+        ('graphStewart').replace ;
       
       }
     else {

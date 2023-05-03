@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   <nav class="navbar is-primary" role="navigation" aria-label="dropdown navigation">
   <a class="navbar-item">
     <img src="assets/img/Logo_2.png"
-      width="112" height="28">
+      width="112" height="28" routerLink="/">
   </a>
   <a class="navbar-item" routerLink="/">
   Home

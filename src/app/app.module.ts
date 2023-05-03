@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { Chart, ChartModule } from 'angular-highcharts';
 import { HighchartsChartModule } from 'highcharts-angular';
 import { IgxAccordionModule,IgxSwitchModule } from 'igniteui-angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //I keep the new line
 
@@ -37,6 +38,7 @@ import { GuideComponent } from './guide/guide.component';
 		FormsModule,
 		ChartModule,
 		HighchartsChartModule,
+		BrowserAnimationsModule,
     IgxAccordionModule,
     IgxSwitchModule
 	],
