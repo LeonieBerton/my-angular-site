@@ -19,7 +19,7 @@ import { Component } from '@angular/core';
     <igx-expansion-panel>
       <igx-expansion-panel-header>
         <igx-expansion-panel-title class="titre">
-          Ce site.... C'est quoi ?
+          Ce site... C'est quoi ?
         </igx-expansion-panel-title>
       </igx-expansion-panel-header>
       <igx-expansion-panel-body>
@@ -48,51 +48,28 @@ import { Component } from '@angular/core';
             -> Allez dans le menu déroulant principal
           </ul>
           <ul>
-            -> Cliquez sur "Enregistrer un nouveau vol"
+            -> Cliquez sur "Ajouter un vol"
           </ul>
           <ul>
             -> Remplissez toutes les informations demandées et cliquez sur
             envoyer
           </ul>
+          <br>
           <div class="important">
             Attention ! Pour les nombres à virgules remplacez celle-ci par un
             point !
           </div>
-        </div>
-      </igx-expansion-panel-body>
-    </igx-expansion-panel>
-    <igx-expansion-panel>
-      <igx-expansion-panel-header>
-        <igx-expansion-panel-title class="titre">
-          J'ai remarqué une erreur / je me suis trompé en enregistrant
-        </igx-expansion-panel-title>
-      </igx-expansion-panel-header>
-      <igx-expansion-panel-body>
-        <div class="body-container">
-          <div>
-            Vous connaissez le nom du steward et le numéro de vol inscrit ?
+          <br>
+		      <div class="important">
+            NB : notez ces données sur une feuille... Le service ne fonctionne pas encore
           </div>
-          <div>Dans ce cas aucun souci !</div>
-          <ul>
-            -> Allez dans le menu déroulant principal
-          </ul>
-          <ul>
-            -> Cliquez sur "Modifier un enregistrement"
-          </ul>
-          <ul>
-            -> Selectionnez le vol et le steward correspondant
-          </ul>
-          <ul>
-            -> Remplissez les champs demandés et cliquez sur envoyer
-          </ul>
-          <div>Sinon, cette erreur n'est pas corrigeable désolé</div>
         </div>
       </igx-expansion-panel-body>
     </igx-expansion-panel>
     <igx-expansion-panel>
       <igx-expansion-panel-header>
         <igx-expansion-panel-title class="titre">
-          Comment enregistrer un nouveau collaborateur ?
+          Comment enregistrer un nouveau steward ?
         </igx-expansion-panel-title>
       </igx-expansion-panel-header>
       <igx-expansion-panel-body>
@@ -101,35 +78,63 @@ import { Component } from '@angular/core';
             -> Allez dans le menu déroulant principal
           </ul>
           <ul>
-            -> Cliquez sur "Enregistrer un nouveau vol"
+            -> Cliquez sur "Ajouter un steward"
           </ul>
           <ul>
             Puis remplissez toutes les informations demandées
           </ul>
         </div>
+        <br>
+		    <div class="important">
+            NB : notez ces données sur une feuille... Le service ne fonctionne pas encore
+        </div>
       </igx-expansion-panel-body>
     </igx-expansion-panel>
-    <igx-expansion-panel>
+	<igx-expansion-panel>
       <igx-expansion-panel-header>
         <igx-expansion-panel-title class="titre">
-          Les grapiques proposés ne me conviennent pas. Est-il possible de les
-          modifier ?
+          A quoi correspondent les graphiques ?
         </igx-expansion-panel-title>
       </igx-expansion-panel-header>
       <igx-expansion-panel-body>
-        <div>En fonction des graphiques, il est possible de les modifier.</div>
         <div>
-          Certains graphiques possèdent un menu déroulant en haut à droite :
-          tentez de sélectionner différentes valeur et vous verrez le graphique
-          changer.
+          Les graphiques retracent l'évolution de notre compagnie depuis que nous avons commencé à récolter 
+          les données dans une optique d'amélioration continue.
         </div>
-        <div>Vous avez 6 types de graphiques qui vous sont proposés :</div>
-        <li>spline : une courbe arrondie</li>
-        <li>line : une courbe simple</li>
-        <li>scatter : des points</li>
-        <li>column : un graphique en colonne</li>
-        <li>bar : un graphique en colonne</li>
-        <li>area : un graphique avec des zones</li>
+        <div>
+            Les données démarrent donc en janvier 2022
+        </div>
+        <div>
+          Les chiifres tout en haut correspondent :
+        </div>
+          <ul>
+            - au nombre total de vols effectués depuis janvier 2022
+          </ul>
+          <ul>
+            - au nombre total de stewards de notre compagnie
+          </ul>
+        <div></div> <br>
+        <div>
+          Dessous vous avez pour le moment 6 graphiques diiférents :
+        </div>
+          <ul>
+            - la répartition des vols jour / nuit
+          </ul>
+          <ul>
+            - le nombre de vol par note par météo
+          </ul>
+          <ul>
+            - le nombre de vol par Steward
+          </ul>
+          <ul>
+            - le nombre moyen de jours de repos par mois
+          </ul>
+          <ul>
+            - le nombre de vol par ville
+          </ul>
+          <ul>
+            - la moyenne des notes par mois
+          </ul>
       </igx-expansion-panel-body>
     </igx-expansion-panel>
     <igx-expansion-panel>
@@ -139,7 +144,21 @@ import { Component } from '@angular/core';
         </igx-expansion-panel-title>
       </igx-expansion-panel-header>
       <igx-expansion-panel-body>
-        Cela dépend des graphiques
+        <div>
+          Cela dépend des graphiques :
+        </div>
+        <div>
+          Les données situées tout en haut proviennent effectivement de la base de données, 
+          ainsi que les données qui constituent les graphiques :
+        </div>
+        <div>
+          <ul>
+          -
+          </ul>
+        </div>
+        <div>
+          Les autres sont des données que l'on a calculé à partir du fichier Excel et mises en brutes dans le code.
+        </div>
       </igx-expansion-panel-body>
     </igx-expansion-panel>
   </igx-accordion>

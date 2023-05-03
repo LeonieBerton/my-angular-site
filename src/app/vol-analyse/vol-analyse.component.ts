@@ -5,6 +5,7 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, getCountFromServer } from "firebase/firestore";
 
 
+
 @Component({
   selector: 'app-vol-analyse',
   template: `
@@ -33,7 +34,7 @@ import { getFirestore, getCountFromServer } from "firebase/firestore";
           <img src="assets/img/homme_picto.png">
         </figure>
         </div>
-        <div class='card-content has-text-centered'>{{nombre}}</div>
+        <div class='card-content has-text-centered'>{{nombre}} Steward</div>
         </div>
     <div id="graphMeteo"></div>
     <div id="graphRepos"></div>
@@ -50,7 +51,7 @@ import { getFirestore, getCountFromServer } from "firebase/firestore";
 export class VolAnalyseComponent {
   
 
-  public options: any = {
+  public options_1: any = {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -133,9 +134,9 @@ export class VolAnalyseComponent {
       text: "Nombre de vol par Steward"
     },
     xAxis: {
-      categories://{{texte}},
+      categories:[],
       //["Emmanuel Guillon", "Maryse Lopez", "Alfred Chevallier-Duval", "Honore de Lombard", "Alex Torres", "Laurence Fernandez", "Dorothee de la Gomez", "Josephine Renard", "Olivie Vaillant de Baron", "Luc Carre", "Stephane Blanc", "Alexandre Blot", "Christelle Michel-Perez", "Dominique du Pires", "Claude Lebrun", "Roland Fernandez"],
-      [],
+      
       title: {
         text: "steward"
       }
@@ -195,7 +196,7 @@ export class VolAnalyseComponent {
     }]
   }
 
-  public ville: any = {
+  public ville_char: any = {
     chart: {
       type: 'column'
     },
@@ -203,7 +204,8 @@ export class VolAnalyseComponent {
       text: "Nombre de vol par ville"
     },
     xAxis: {
-      categories: ["Lisbonne", "Palma", "Bordeaux", "New York", "Quebec", "Londres", "Vancouver", "Paris", "Moscou", "Tokyo", "Stockholm", "Miami", "Rio de Janeiro"],
+      categories:[],
+      //["Lisbonne", "Palma", "Bordeaux", "New York", "Quebec", "Londres", "Vancouver", "Paris", "Moscou", "Tokyo", "Stockholm", "Miami", "Rio de Janeiro"],
       title: {
         text: "Ville"
       }
@@ -258,8 +260,8 @@ export class VolAnalyseComponent {
   noms: any;
   city:any;
   nombre:any;
-  texte:any;
-  textes:any;
+  test:any;
+  jour:any;
 
   constructor() {
    
@@ -284,20 +286,17 @@ export class VolAnalyseComponent {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        //console.log(doc.id, " => ", doc.data());
       });
 		
 		if (!querySnapshot.empty) {
         /*console.log("Document data:");*/
         this.noms=querySnapshot.docs;
-        //this.textes=[];
         this.stewart.xAxis.categories=[];
         for (let nom of this.noms) {
           this.stewart.xAxis.categories.push(nom.data().nomPrenom);
-          console.log(this.stewart.xAxis.categories);
         }
-        console.log(this.stewart.xAxis.categories);
-        ('graphStewart').replace ;
+        Highcharts.chart('graphStewart', this.stewart);
       
       }
     else {
@@ -310,7 +309,37 @@ export class VolAnalyseComponent {
     const snapshot = await getCountFromServer(quest);
     console.log('count: ', snapshot.data().count);
     this.nombre=snapshot.data().count;
+      
 
+    const qu = query(collection(db, "Ville"), where("id", "!=", "Null"));
+
+      const queryS = await getDocs(qu);
+		
+		if (!queryS.empty) {
+        /*console.log("Document data:");*/
+        this.villes=queryS.docs;
+        this.ville_char.xAxis.categories=[];
+        for (let ville of this.villes) {
+          this.ville_char.xAxis.categories.push(ville.data().Ville);
+          console.log(ville.data().Ville)
+        }
+        Highcharts.chart('graphVille', this.ville_char);
+      
+      }
+    else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+      }
+
+
+    /*const collec = collection(db, "FluAirLine");
+    const question = query(collec, where("heureDecollage", ">", 8.00),where("heureDecollage", "<", 22.00));
+    const snapsh = await getCountFromServer(question);
+    this.options_1.series.data.y=Int8Array;
+    console.log('count: ', snapsh.data().count);
+    this.options_1.series.data.y=snapsh.data().count;
+    
+    Highcharts.chart('graphNuit', this.options_1);*/
     }
     init();
 
@@ -320,8 +349,8 @@ export class VolAnalyseComponent {
     Highcharts.chart('graphStewart', this.stewart);
     Highcharts.chart('graphMeteo', this.meteo);
     Highcharts.chart('graphRepos', this.repos);
-    Highcharts.chart('graphNuit', this.options);
-    Highcharts.chart('graphVille', this.ville);
+    Highcharts.chart('graphNuit', this.options_1);
+    Highcharts.chart('graphVille', this.ville_char);
     Highcharts.chart('graphNote', this.note);
   }
 
