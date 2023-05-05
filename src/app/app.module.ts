@@ -7,7 +7,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
 import { IgxAccordionModule,IgxSwitchModule } from 'igniteui-angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-//I keep the new line
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,6 +16,7 @@ import { HomeComponent } from './home/home.component';
 import { EmployeComponent } from './employe/employe.component';
 import { VolComponent } from './vol/vol.component';
 import { GuideComponent } from './guide/guide.component';
+import { VolAnalyseComponent } from './vol-analyse/vol-analyse.component';
 
 
 //I keep the new line
@@ -28,7 +29,8 @@ import { GuideComponent } from './guide/guide.component';
 		HomeComponent,
 		EmployeComponent,
 		VolComponent,
-		GuideComponent
+		GuideComponent,
+		VolAnalyseComponent
 	],
 
 	entryComponents: [],

@@ -5,53 +5,90 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, getCountFromServer } from "firebase/firestore";
 
 
-
 @Component({
   selector: 'app-vol-analyse',
   template: `
-<h1 class="title has-text-centered">Tableau de bord</h1>
+  <h1 class="title has-text-centered">Tableau de bord</h1>
 
-<div class="columns">
+  <div class="columns">
     <div class="column">
-    <div class='card equal-height'>
+      <div class='card equal-height'>
         <div class="card-image has-text-centered">
-        <figure class="image is-24x24 is-inline-block">
-          <img src="assets/img/avion_picto.png">
-        </figure>
+          <figure class="image is-24x24 is-inline-block">
+            <img src="assets/img/avion_picto.png">
+          </figure>
         </div>
         <div class='card-content has-text-centered'>936 vols enregistrés</div>
-        </div>
+      </div>
 
+
+      <div class="container">
+        <div class="select is-rounded">
+          <select (ngModelChange)="onChangeGraph1($event)" [ngModel] = "graph1">
+            <option *ngFor="let nom of typeGraphs" [ngValue]="nom">{{nom}}</option>
+          </select>
+        </div>
+      </div>
       <div id="graphStewart"></div>
-      <div id="graphNuit"></div>  
+
+
+      <div id="graphNuit"></div> 
+      
+      
+      <div class="container">
+        <div class="select is-rounded">
+          <select (ngModelChange)="onChangeGraph2($event)" [ngModel] = "graph2">
+            <option *ngFor="let nom of typeGraphs" [ngValue]="nom">{{nom}}</option>
+          </select>
+        </div>
+      </div> 
       <div id="graphVille"></div>            
     </div>
 
     <div class="column">
-    <div class='card equal-height'>
+      <div class='card equal-height'>
         <div class="card-image has-text-centered">
-        <figure class="image is-24x24 is-inline-block">
-          <img src="assets/img/homme_picto.png">
-        </figure>
+          <figure class="image is-24x24 is-inline-block">
+            <img src="assets/img/homme_picto.png">
+          </figure>
         </div>
-        <div class='card-content has-text-centered'>{{nombre}} Steward</div>
-        </div>
-    <div id="graphMeteo"></div>
-    <div id="graphRepos"></div>
-    <div id="graphNote"></div>
+        <div class='card-content has-text-centered'>{{nombre}} stewards</div>
+      </div>
 
+
+
+      <div class="container">
+        <div class="select is-rounded">
+          <select (ngModelChange)="onChangeGraph3($event)" [ngModel] = "graph3">
+            <option *ngFor="let nom of typeGraphs" [ngValue]="nom">{{nom}}</option>
+          </select>
+        </div>
+      </div> 
+      <div id="graphMeteo"></div>
+
+
+      <div class="container">
+        <div class="select is-rounded">
+          <select (ngModelChange)="onChangeGraph4($event)" [ngModel] = "graph4">
+            <option *ngFor="let nom of typeGraphs" [ngValue]="nom">{{nom}}</option>
+          </select>
+        </div>
+      </div> 
+      <div id="graphRepos"></div>
+      <div id="graphNote"></div>
     </div>
-    
-</div>
+  </div>
 
-  `,
-  styles: [
-  ]
+    `,
+    styles: [
+    ]
 })
-export class VolAnalyseComponent {
-  
 
-  public options_1: any = {
+
+
+
+export class VolAnalyseComponent {
+  public options: any = {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -70,14 +107,14 @@ export class VolAnalyseComponent {
         }
     },
     plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: true,
-                format: '{point.name}: {point.percentage:.1f} %'
-            }
+      pie: {
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '{point.name}: {point.percentage:.1f} %'
         }
+      }
     },
     series: [{
       data: [{
@@ -128,15 +165,15 @@ export class VolAnalyseComponent {
   
   public stewart: any = {
     chart: {
-      type: 'bar'
+      type: "bar"
     },
     title: {
       text: "Nombre de vol par Steward"
     },
     xAxis: {
-      categories:[],
+      categories://{{texte}},
       //["Emmanuel Guillon", "Maryse Lopez", "Alfred Chevallier-Duval", "Honore de Lombard", "Alex Torres", "Laurence Fernandez", "Dorothee de la Gomez", "Josephine Renard", "Olivie Vaillant de Baron", "Luc Carre", "Stephane Blanc", "Alexandre Blot", "Christelle Michel-Perez", "Dominique du Pires", "Claude Lebrun", "Roland Fernandez"],
-      
+      [],
       title: {
         text: "steward"
       }
@@ -164,7 +201,7 @@ export class VolAnalyseComponent {
   }
   public repos: any = {
     chart: {
-      type: 'spline'
+      type: "spline"
     },
     title: {
       text: "Nombre moyen de jours de repos par mois"
@@ -196,7 +233,7 @@ export class VolAnalyseComponent {
     }]
   }
 
-  public ville_char: any = {
+  public ville: any = {
     chart: {
       type: 'column'
     },
@@ -204,8 +241,7 @@ export class VolAnalyseComponent {
       text: "Nombre de vol par ville"
     },
     xAxis: {
-      categories:[],
-      //["Lisbonne", "Palma", "Bordeaux", "New York", "Quebec", "Londres", "Vancouver", "Paris", "Moscou", "Tokyo", "Stockholm", "Miami", "Rio de Janeiro"],
+      categories: ["Lisbonne", "Palma", "Bordeaux", "New York", "Quebec", "Londres", "Vancouver", "Paris", "Moscou", "Tokyo", "Stockholm", "Miami", "Rio de Janeiro"],
       title: {
         text: "Ville"
       }
@@ -232,8 +268,7 @@ export class VolAnalyseComponent {
   }
   public note: any = {
     Chart: {
-      type: 'area',
-      height: 700
+      type: 'area'
     },
     title: {
       text: 'Moyenne des notes par mois'
@@ -256,13 +291,23 @@ export class VolAnalyseComponent {
       data: [3.19,2.86,2.95]
     }]
   }
+
+
   villes: any;
   noms: any;
   city:any;
   nombre:any;
-  test:any;
-  jour:any;
+  texte:any;
+  textes:any;
 
+
+  typeGraphs = ["spline", "line", "scatter", "column", "bar", "area"];
+  graph1:string = "bar";
+  graph2:string = "column";
+  graph3:string = "bar";
+  graph4:string = "spline";
+
+  
   constructor() {
    
 
@@ -286,17 +331,20 @@ export class VolAnalyseComponent {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        //console.log(doc.id, " => ", doc.data());
+        console.log(doc.id, " => ", doc.data());
       });
 		
 		if (!querySnapshot.empty) {
         /*console.log("Document data:");*/
         this.noms=querySnapshot.docs;
+        //this.textes=[];
         this.stewart.xAxis.categories=[];
         for (let nom of this.noms) {
           this.stewart.xAxis.categories.push(nom.data().nomPrenom);
+          console.log(this.stewart.xAxis.categories);
         }
-        Highcharts.chart('graphStewart', this.stewart);
+        console.log(this.stewart.xAxis.categories);
+        ('graphStewart').replace ;
       
       }
     else {
@@ -309,53 +357,43 @@ export class VolAnalyseComponent {
     const snapshot = await getCountFromServer(quest);
     console.log('count: ', snapshot.data().count);
     this.nombre=snapshot.data().count;
-      
 
-    const qu = query(collection(db, "Ville"), where("id", "!=", "Null"));
-
-      const queryS = await getDocs(qu);
-		
-		if (!queryS.empty) {
-        /*console.log("Document data:");*/
-        this.villes=queryS.docs;
-        this.ville_char.xAxis.categories=[];
-        for (let ville of this.villes) {
-          this.ville_char.xAxis.categories.push(ville.data().Ville);
-          console.log(ville.data().Ville)
-        }
-        Highcharts.chart('graphVille', this.ville_char);
-      
-      }
-    else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-      }
-
-
-    /*const collec = collection(db, "FluAirLine");
-    const question = query(collec, where("heureDecollage", ">", 8.00),where("heureDecollage", "<", 22.00));
-    const snapsh = await getCountFromServer(question);
-    this.options_1.series.data.y=Int8Array;
-    console.log('count: ', snapsh.data().count);
-    this.options_1.series.data.y=snapsh.data().count;
-    
-    Highcharts.chart('graphNuit', this.options_1);*/
     }
     init();
-
+    
   }
 
   ngOnInit() {
     Highcharts.chart('graphStewart', this.stewart);
     Highcharts.chart('graphMeteo', this.meteo);
     Highcharts.chart('graphRepos', this.repos);
-    Highcharts.chart('graphNuit', this.options_1);
-    Highcharts.chart('graphVille', this.ville_char);
+    Highcharts.chart('graphNuit', this.options);
+    Highcharts.chart('graphVille', this.ville);
     Highcharts.chart('graphNote', this.note);
   }
 
-}
+  onChangeGraph1(test : string){
+    this.graph1 = test;
+    this.stewart.chart.type = test;
+    Highcharts.chart('graphStewart', this.stewart);
+  }
 
-// git add .
-// git commit -m "first commit"
-// git push -u origin main
+
+  onChangeGraph2(test : string){
+    this.graph2 = test;
+    this.ville.chart.type = test;
+    Highcharts.chart('graphVille', this.ville);
+  }
+
+  onChangeGraph3(test : string){
+    this.graph3 = test;
+    this.meteo.chart.type = test;
+    Highcharts.chart('graphMeteo', this.meteo);
+  }
+
+  onChangeGraph4(test : string){
+    this.graph4 = test;
+    this.repos.chart.type = test;
+    Highcharts.chart('graphRepos', this.repos);
+  }
+}

@@ -148,17 +148,35 @@ import { Component } from '@angular/core';
           Cela dépend des graphiques :
         </div>
         <div>
-          Les données situées tout en haut proviennent effectivement de la base de données, 
-          ainsi que les données qui constituent les graphiques :
-        </div>
-        <div>
-          <ul>
-          -
-          </ul>
+          L'information du nombre de steward provient effectivement de la base de données, 
+          ainsi que les noms des stewards et le noms des villes
         </div>
         <div>
           Les autres sont des données que l'on a calculé à partir du fichier Excel et mises en brutes dans le code.
         </div>
+      </igx-expansion-panel-body>
+    </igx-expansion-panel>
+    <igx-expansion-panel>
+      <igx-expansion-panel-header>
+        <igx-expansion-panel-title class="titre">
+          Les grapiques proposés ne me conviennent pas. Est-il possible de les
+          modifier ?
+        </igx-expansion-panel-title>
+      </igx-expansion-panel-header>
+      <igx-expansion-panel-body>
+        <div>En fonction des graphiques, il est possible de les modifier.</div>
+        <div>
+          Certains graphiques possèdent un menu déroulant en haut à droite :
+          tentez de sélectionner différentes valeur et vous verrez le graphique
+          changer.
+        </div>
+        <div>Vous avez 6 types de graphiques qui vous sont proposés :</div>
+        <li>spline : une courbe arrondie</li>
+        <li>line : une courbe simple</li>
+        <li>scatter : des points</li>
+        <li>column : un graphique en colonne</li>
+        <li>bar : un graphique en colonne</li>
+        <li>area : un graphique avec des zones</li>
       </igx-expansion-panel-body>
     </igx-expansion-panel>
   </igx-accordion>
